@@ -1,0 +1,11 @@
+{
+  "total_transactions": 284807,
+  "fraud_transactions": 492,
+  "fraud_rate_pct": 0.1727485630620034,
+  "total_transaction_amount": 25162590.009999998,
+  "total_fraud_amount": 60127.97,
+  "fraud_value_share_pct": 0.2389577939953885,
+  "time_span_hours": 47.99777777777778,
+  "units_note": "Amount is in source dataset units; confirm currency using dataset documentation.",
+  "interpretation_note": "Associations and patterns do not establish causal fraud mechanisms."
+}

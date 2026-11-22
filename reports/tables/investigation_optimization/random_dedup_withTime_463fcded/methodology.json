@@ -1,0 +1,38 @@
+{
+  "source_run_dir": "reports\\tables\\ml\\random_dedup_withTime_463fcded",
+  "source_split": "random",
+  "source_run_id": "463fcded",
+  "source_model": "XGBoost__class_weight",
+  "source_dataset_sha256": "76274b691b16a6c49d3f159c883398e03ccd6d1ee12d9d8ee38f4b4b98551a89",
+  "training_scored_oof_rows": 198608,
+  "training_unscored_rows": 0,
+  "holdout_rows": 85118,
+  "training_objective": "value_recall",
+  "capacities_per_10000": [
+    5.0,
+    10.0,
+    20.0,
+    50.0
+  ],
+  "scenario": {
+    "review_cost": 5.0,
+    "effectiveness": 0.5,
+    "false_positive_friction_cost": 0.0
+  },
+  "policies": {
+    "fraud_score": "rank saved selected-model score",
+    "score_times_amount": "rank saved selected-model score multiplied by Amount"
+  },
+  "methodology": [
+    "Policy family and capacity budgets are predeclared.",
+    "Winning ranking strategy at each budget selected from training OOF rows ONLY.",
+    "Both predeclared policies shown on holdout; do NOT pick a winner using holdout outcomes.",
+    "For each evaluated batch, top floor(N*capacity/10000) is reviewed; tied ranks resolved by original_row.",
+    "This batch policy uses all evaluation-batch scores; not an online threshold and not a point-in-time stream simulation.",
+    "Scores may not be calibrated probabilities; multiplying score by amount is a heuristic, not expected recoverable loss.",
+    "Training OOF period mix may be unstable; selected strategy is not proven optimal for the future.",
+    "Model selection and policy comparison reuse OOF labels; training estimates may be optimistic.",
+    "Test annotations are retrospective; this experiment does not justify retuning on test.",
+    "Dataset currency, real costs, intervention outcomes, customer friction and repeated-customer dependence unknown."
+  ]
+}

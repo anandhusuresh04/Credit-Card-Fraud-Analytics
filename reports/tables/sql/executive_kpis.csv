@@ -1,0 +1,2 @@
+transactions,fraud_cases,legitimate_cases,fraud_rate_pct,total_transaction_value,fraudulent_value,exact_duplicate_rows,zero_amount_rows
+284807,492,284315,0.172749,25162590.01,60127.97,1081,1825

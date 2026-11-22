@@ -1,0 +1,25 @@
+{
+  "input_path": "E:\\DataAnalytics\\Projects\\Credit_Card_Fraud_Analytics\\data\\processed\\cleaned.csv",
+  "sha256": "895dc3dad2840ac9e05c12d6442bd739d879c2d405e9b065efc0f1973be46a84",
+  "created_utc": "2026-11-22T18:14:27.474722+00:00",
+  "output_path": "E:\\DataAnalytics\\Projects\\Credit_Card_Fraud_Analytics\\reports\\tables\\business",
+  "quantile_count_requested": 10,
+  "quantile_count_actual": 10,
+  "time_interval_hours": 4.0,
+  "source_currency": "unverified (original Amount units)",
+  "assumed_review_costs_source_units": [
+    1.0,
+    5.0,
+    10.0
+  ],
+  "assumed_intervention_effectiveness": [
+    0.25,
+    0.5,
+    1.0
+  ],
+  "assumed_friction_cost_per_legitimate_review": 0.0,
+  "fraud_value_definition": "sum(Amount where Class == 1), not booked losses",
+  "data_policy": "No rows altered, duplicate removal optional upstream",
+  "policy_note": "In-sample descriptive review scenarios, not out-of-sample predictions",
+  "scenario_note": "Perfect oracle review and assumed intervention effectiveness; illustrative only"
+}

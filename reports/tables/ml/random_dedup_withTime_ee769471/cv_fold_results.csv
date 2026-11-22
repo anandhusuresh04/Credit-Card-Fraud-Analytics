@@ -1,0 +1,3 @@
+key,fold,train_rows,validation_rows,train_fraud,validation_fraud,fold_ap
+LogisticRegression__baseline,1,99304,99304,166,165,0.7339192533932439
+LogisticRegression__baseline,2,99304,99304,165,166,0.7507472571390236

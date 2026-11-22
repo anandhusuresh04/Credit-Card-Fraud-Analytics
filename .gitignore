@@ -1,0 +1,231 @@
+
+# =============================================================================
+# CREDIT CARD FRAUD ANALYTICS & INVESTIGATION OPTIMIZATION
+# GitHub Repository - .gitignore
+# =============================================================================
+#
+# KEEP TRACKED:
+#   - Python source code and tests
+#   - Four final research notebooks
+#   - SQL scripts and database schema
+#   - Streamlit dashboard and theme configuration
+#   - YAML configuration and dependency files
+#   - README, documentation and approved screenshots
+#   - Selected reports/tables and reports/figures
+#
+# EXCLUDE:
+#   - Local environments and caches
+#   - Raw and processed transaction datasets
+#   - SQLite databases and trained models
+#   - Credentials and temporary development files
+# =============================================================================
+
+
+# -----------------------------------------------------------------------------
+# 1. Python virtual environments
+# -----------------------------------------------------------------------------
+.venv/
+venv/
+env/
+ENV/
+.conda/
+
+
+# -----------------------------------------------------------------------------
+# 2. Python caches and compiled files
+# -----------------------------------------------------------------------------
+__pycache__/
+*.py[cod]
+*$py.class
+
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.pyre/
+.pytype/
+
+*.egg-info/
+.eggs/
+build/
+dist/
+
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.nox/
+
+
+# -----------------------------------------------------------------------------
+# 3. Jupyter notebooks and IPython
+# -----------------------------------------------------------------------------
+.ipynb_checkpoints/
+.ipython/
+.jupyter/
+
+# Keep final executed .ipynb files tracked.
+
+
+# -----------------------------------------------------------------------------
+# 4. IDE and editor files
+# -----------------------------------------------------------------------------
+.vscode/
+.idea/
+*.code-workspace
+*.swp
+*.swo
+*~
+
+.DS_Store
+Thumbs.db
+desktop.ini
+
+
+# -----------------------------------------------------------------------------
+# 5. Credentials, environment variables and secrets
+# -----------------------------------------------------------------------------
+.env
+.env.*
+!.env.example
+
+*.pem
+*.key
+*.p12
+*.pfx
+
+secrets.toml
+.streamlit/secrets.toml
+
+credentials.json
+service-account.json
+
+
+# -----------------------------------------------------------------------------
+# 6. Original, intermediate and processed datasets
+# -----------------------------------------------------------------------------
+# Original ULB/Kaggle data must be downloaded separately.
+
+data/raw/*
+!data/raw/.gitkeep
+
+data/interim/*
+!data/interim/.gitkeep
+
+data/processed/*
+!data/processed/.gitkeep
+
+# Ignore common dataset exports outside the tracked reports.
+creditcard.csv
+deduped.csv
+
+
+# -----------------------------------------------------------------------------
+# 7. SQLite databases and temporary database files
+# -----------------------------------------------------------------------------
+*.sqlite
+*.sqlite3
+*.db
+*.db-journal
+*.db-wal
+*.db-shm
+
+
+# -----------------------------------------------------------------------------
+# 8. Saved machine learning models
+# -----------------------------------------------------------------------------
+# Preserve model directory structure without committing binaries.
+
+models/*
+!models/.gitkeep
+
+*.joblib
+*.pkl
+*.pickle
+*.onnx
+*.h5
+*.hdf5
+*.keras
+
+
+# -----------------------------------------------------------------------------
+# 9. Temporary files, logs and local caches
+# -----------------------------------------------------------------------------
+*.tmp
+*.temp
+*.bak
+*.log
+*.part
+
+.tmp/
+tmp/
+temp/
+cache/
+logs/
+
+.gitignore.backup
+
+
+# -----------------------------------------------------------------------------
+# 10. Legacy notebooks and local development archives
+# -----------------------------------------------------------------------------
+archive/
+legacy_notebooks/
+notebooks/archive/
+notebooks/legacy/
+
+
+# -----------------------------------------------------------------------------
+# 11. Large exports and local scratch outputs
+# -----------------------------------------------------------------------------
+*.parquet
+*.feather
+*.arrow
+
+# Keep verified CSV and JSON reports trackable.
+# Do not globally ignore *.csv or *.json.
+
+
+# -----------------------------------------------------------------------------
+# 12. Analytical reports and visualizations
+# -----------------------------------------------------------------------------
+# Intentionally TRACKABLE:
+#
+# reports/tables/
+# reports/figures/
+#
+# The Streamlit dashboard and four notebooks read generated evidence.
+# Review the size and sensitivity of each artifact before committing.
+#
+# Exclude only transient report files:
+reports/**/*.tmp
+reports/**/*.bak
+reports/**/*.log
+
+
+# -----------------------------------------------------------------------------
+# 13. Streamlit
+# -----------------------------------------------------------------------------
+# Keep .streamlit/config.toml under version control.
+# Never commit .streamlit/secrets.toml.
+
+
+# -----------------------------------------------------------------------------
+# 14. Project configurations and documentation
+# -----------------------------------------------------------------------------
+# Keep the following tracked:
+#
+# configs/model_config.yaml
+# requirements.txt
+# requirements_dashboard.txt
+# pyproject.toml
+# README.md
+# sql/
+# src/
+# tests/
+# notebooks/
+# dashboard/
+# =============================================================================
+# Large generated ML training artifacts
+# Retained locally; excluded from GitHub to reduce repository size.
+reports/tables/ml/*/training_oof_scores.csv
+reports/tables/ml/*/training_threshold_curve.csv

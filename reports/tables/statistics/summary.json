@@ -1,0 +1,21 @@
+{
+  "generated_utc": "2026-11-22T18:04:47.518352+00:00",
+  "input_path": "E:\\DataAnalytics\\Projects\\Credit_Card_Fraud_Analytics\\data\\processed\\cleaned.csv",
+  "dedup_path": "E:\\DataAnalytics\\Projects\\Credit_Card_Fraud_Analytics\\data\\processed\\deduped.csv",
+  "observations": 284807,
+  "fraud_cases": 492,
+  "hypothesis_tests": 9,
+  "holm_significant_at_0_05": 9,
+  "bootstrap_resamples": 2000,
+  "random_seed": 42,
+  "analysis_type": "exploratory, observational; no causal inference",
+  "currency_note": "Original dataset amount units; no assumption of recovered/unrecovered loss",
+  "files": [
+    "hypothesis_tests.csv",
+    "segment_risk.csv",
+    "value_uncertainty.csv",
+    "duplicate_sensitivity.csv",
+    "summary.json",
+    "interpretation_notes.md"
+  ]
+}

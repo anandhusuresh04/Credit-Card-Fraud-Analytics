@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="603.648pt" height="345.221969pt" viewBox="0 0 603.648 345.221969" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:date>2026-11-22T23:29:30.869941</dc:date>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.10.9, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M -0 345.221969 
+L 603.648 345.221969 
+L 603.648 0 
+L -0 0 
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 77.508 291.365969 
+L 596.448 291.365969 
+L 596.448 39.077969 
+L 77.508 39.077969 
+z
+" style="fill: #ffffff"/>
+   </g>
+   <g id="patch_3">
+    <path d="M 101.096182 291.365969 
+L 249.73404 291.365969 
+L 249.73404 275.897147 
+L 101.096182 275.897147 
+z
+" clip-path="url(#p556e8c81be)" style="fill: #12958e"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 424.22196 291.365969 
+L 572.859818 291.365969 
+L 572.859818 152.093912 
+L 424.22196 152.093912 
+z
+" clip-path="url(#p556e8c81be)" style="fill: #db5265"/>
+   </g>
+   <g id="matplotlib.axis_1">
+    <g id="xtick_1">
+     <g id="line2d_1">
+      <defs>
+       <path id="m85057c2324" d="M 0 0 
+L 0 3.5 
+" style="stroke: #65768b; stroke-width: 0.8"/>
+      </defs>
+      <g>
+       <use xlink:href="#m85057c2324" x="175.415111" y="291.365969" style="fill: #65768b; stroke: #65768b; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_1">
+      <text style="font-size: 10px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #65768b" x="175.415111" y="305.964406" transform="rotate(-0 175.415111 305.964406)">Positive-amount</text>
+     </g>
+    </g>
+    <g id="xtick_2">
+     <g id="line2d_2">
+      <g>
+       <use xlink:href="#m85057c2324" x="498.540889" y="291.365969" style="fill: #65768b; stroke: #65768b; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_2">
+      <text style="font-size: 10px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #65768b" x="498.540889" y="305.964406" transform="rotate(-0 498.540889 305.964406)">Zero-amount</text>
+     </g>
+    </g>
+   </g>
+   <g id="matplotlib.axis_2">
+    <g id="ytick_1">
+     <g id="line2d_3">
+      <defs>
+       <path id="m5189566160" d="M 0 0 
+L -3.5 0 
+" style="stroke: #65768b; stroke-width: 0.8"/>
+      </defs>
+      <g>
+       <use xlink:href="#m5189566160" x="77.508" y="291.365969" style="fill: #65768b; stroke: #65768b; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_3">
+      <text style="font-size: 10px; font-family: 'DejaVu Sans'; text-anchor: end; fill: #65768b" x="70.508" y="295.165187" transform="rotate(-0 70.508 295.165187)">0.0</text>
+     </g>
+    </g>
+    <g id="ytick_2">
+     <g id="line2d_4">
+      <g>
+       <use xlink:href="#m5189566160" x="77.508" y="244.297172" style="fill: #65768b; stroke: #65768b; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_4">
+      <text style="font-size: 10px; font-family: 'DejaVu Sans'; text-anchor: end; fill: #65768b" x="70.508" y="248.096391" transform="rotate(-0 70.508 248.096391)">0.5</text>
+     </g>
+    </g>
+    <g id="ytick_3">
+     <g id="line2d_5">
+      <g>
+       <use xlink:href="#m5189566160" x="77.508" y="197.228375" style="fill: #65768b; stroke: #65768b; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_5">
+      <text style="font-size: 10px; font-family: 'DejaVu Sans'; text-anchor: end; fill: #65768b" x="70.508" y="201.027594" transform="rotate(-0 70.508 201.027594)">1.0</text>
+     </g>
+    </g>
+    <g id="ytick_4">
+     <g id="line2d_6">
+      <g>
+       <use xlink:href="#m5189566160" x="77.508" y="150.159578" style="fill: #65768b; stroke: #65768b; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_6">
+      <text style="font-size: 10px; font-family: 'DejaVu Sans'; text-anchor: end; fill: #65768b" x="70.508" y="153.958797" transform="rotate(-0 70.508 153.958797)">1.5</text>
+     </g>
+    </g>
+    <g id="ytick_5">
+     <g id="line2d_7">
+      <g>
+       <use xlink:href="#m5189566160" x="77.508" y="103.090781" style="fill: #65768b; stroke: #65768b; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_7">
+      <text style="font-size: 10px; font-family: 'DejaVu Sans'; text-anchor: end; fill: #65768b" x="70.508" y="106.89" transform="rotate(-0 70.508 106.89)">2.0</text>
+     </g>
+    </g>
+    <g id="ytick_6">
+     <g id="line2d_8">
+      <g>
+       <use xlink:href="#m5189566160" x="77.508" y="56.021984" style="fill: #65768b; stroke: #65768b; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_8">
+      <text style="font-size: 10px; font-family: 'DejaVu Sans'; text-anchor: end; fill: #65768b" x="70.508" y="59.821203" transform="rotate(-0 70.508 59.821203)">2.5</text>
+     </g>
+    </g>
+    <g id="text_9">
+     <text style="font-size: 10px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #132238" x="48.525188" y="165.221969" transform="rotate(-90 48.525188 165.221969)">Fraud rate (%)</text>
+    </g>
+   </g>
+   <g id="LineCollection_1">
+    <path d="M 175.415111 277.239719 
+L 175.415111 274.427206 
+" clip-path="url(#p556e8c81be)" style="fill: none; stroke: #132238; stroke-width: 1.5"/>
+    <path d="M 498.540889 195.463849 
+L 498.540889 89.535569 
+" clip-path="url(#p556e8c81be)" style="fill: none; stroke: #132238; stroke-width: 1.5"/>
+   </g>
+   <g id="line2d_9">
+    <defs>
+     <path id="mdcd3f4bf77" d="M 4 0 
+L -4 -0 
+" style="stroke: #132238"/>
+    </defs>
+    <g clip-path="url(#p556e8c81be)">
+     <use xlink:href="#mdcd3f4bf77" x="175.415111" y="277.239719" style="fill: #132238; stroke: #132238"/>
+     <use xlink:href="#mdcd3f4bf77" x="498.540889" y="195.463849" style="fill: #132238; stroke: #132238"/>
+    </g>
+   </g>
+   <g id="line2d_10">
+    <g clip-path="url(#p556e8c81be)">
+     <use xlink:href="#mdcd3f4bf77" x="175.415111" y="274.427206" style="fill: #132238; stroke: #132238"/>
+     <use xlink:href="#mdcd3f4bf77" x="498.540889" y="89.535569" style="fill: #132238; stroke: #132238"/>
+    </g>
+   </g>
+   <g id="patch_5">
+    <path d="M 77.508 291.365969 
+L 77.508 39.077969 
+" style="fill: none; stroke: #e7edf2; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="patch_6">
+    <path d="M 77.508 291.365969 
+L 596.448 291.365969 
+" style="fill: none; stroke: #e7edf2; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="text_10">
+    <text style="font-size: 9px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #65768b" x="77.508" y="33.42193" transform="rotate(-0 77.508 33.42193)">Wilson 95% intervals; investigate, do not automatically exclude</text>
+   </g>
+   <g id="text_11">
+    <text style="font-size: 10px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #132238" x="175.415111" y="269.720326" transform="rotate(-0 175.415111 269.720326)">0.16%  (n=282,982)</text>
+   </g>
+   <g id="text_12">
+    <text style="font-size: 10px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #132238" x="498.540889" y="84.828689" transform="rotate(-0 498.540889 84.828689)">1.48%  (n=1,825)</text>
+   </g>
+   <g id="text_13">
+    <text style="font-weight: 700; font-size: 13px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #132238" x="77.508" y="17.077969" transform="rotate(-0 77.508 17.077969)">Zero-amount records have elevated observed fraud rates</text>
+   </g>
+  </g>
+  <g id="text_14">
+   <text style="font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #65768b" x="7.2" y="336.358219" transform="rotate(-0 7.2 336.358219)">Unknown transaction semantics prevent attributing zero amounts to a specific business process.</text>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="p556e8c81be">
+   <rect x="77.508" y="39.077969" width="518.94" height="252.288"/>
+  </clipPath>
+ </defs>
+</svg>

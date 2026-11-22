@@ -1,0 +1,2 @@
+transactions,fraud_cases,legitimate_cases,fraud_rate_pct,total_recorded_value,recorded_fraud_value,fraud_value_share_pct,mean_fraud_amount,median_fraud_amount,duplicate_rows,span_hours
+284807,492,284315,0.17274856,25162590.01000000,60127.97000000,0.23895779,122.21132114,9.25000000,1081,47.99777778

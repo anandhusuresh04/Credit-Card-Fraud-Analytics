@@ -1,0 +1,13 @@
+interval_id,label,transactions,fraud_cases,fraud_rate_pct,fraudulent_value,prior_interval_fraud_cases
+0,00–04 elapsed hours,9577,38,0.396784,2877.76,
+1,04–08 elapsed hours,7962,43,0.540065,5068.82,38
+2,08–12 elapsed hours,29862,65,0.217668,6765.78,43
+3,12–16 elapsed hours,31182,45,0.144314,3459.81,65
+4,16–20 elapsed hours,32269,48,0.14875,10430.77,45
+5,20–24 elapsed hours,33934,42,0.12377,4636.17,48
+6,24–28 elapsed hours,9158,52,0.56781,4973.52,42
+7,28–32 elapsed hours,8581,23,0.268034,1661.15,52
+8,32–36 elapsed hours,29706,21,0.070693,3840.96,23
+9,36–40 elapsed hours,32634,38,0.116443,8016.42,21
+10,40–44 elapsed hours,33038,55,0.166475,5907.95,38
+11,44–48 elapsed hours,26904,22,0.081772,2488.86,55

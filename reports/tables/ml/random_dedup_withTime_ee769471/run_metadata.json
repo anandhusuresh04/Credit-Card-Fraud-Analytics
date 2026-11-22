@@ -1,0 +1,85 @@
+{
+  "created_utc": "2026-11-22T18:23:51.354624+00:00",
+  "raw_csv_path": "data\\raw\\creditcard.csv",
+  "raw_csv_sha256": "76274b691b16a6c49d3f159c883398e03ccd6d1ee12d9d8ee38f4b4b98551a89",
+  "run_id": "ee769471",
+  "data_quality": {
+    "input_rows": 284807,
+    "exact_duplicate_rows": 1081,
+    "duplicate_fraud_rows": 19,
+    "duplicate_handling": "drop_before_split"
+  },
+  "split": "random",
+  "random_state": 42,
+  "test_size": 0.3,
+  "cv_folds": 2,
+  "cv_policy": "StratifiedKFold",
+  "train_rows": 198608,
+  "test_rows": 85118,
+  "drop_time": false,
+  "features": [
+    "V1",
+    "V2",
+    "V3",
+    "V4",
+    "V5",
+    "V6",
+    "V7",
+    "V8",
+    "V9",
+    "V10",
+    "V11",
+    "V12",
+    "V13",
+    "V14",
+    "V15",
+    "V16",
+    "V17",
+    "V18",
+    "V19",
+    "V20",
+    "V21",
+    "V22",
+    "V23",
+    "V24",
+    "V25",
+    "V26",
+    "V27",
+    "V28",
+    "Time",
+    "Amount"
+  ],
+  "model_choices": [
+    "LogisticRegression"
+  ],
+  "strategies": [
+    "baseline"
+  ],
+  "selection": "highest pooled training out-of-fold average precision",
+  "selected_model": "LogisticRegression__baseline",
+  "selected_threshold": 0.14184714869480974,
+  "threshold_objective": "f1",
+  "capacity_alerts_per_1000": null,
+  "scenario_assumptions": {
+    "cost_per_review": 5.0,
+    "intervention_effectiveness": 0.5,
+    "legitimate_transaction_friction_cost": 0.0
+  },
+  "bootstrap_resamples": 50,
+  "limitations": [
+    "Observations may be dependent and are anonymized",
+    "No real intervention outcomes or bank loss figures",
+    "Bootstrap excludes retraining variation and temporal drift",
+    "Chronological CV uses expanding windows; earlier data have no OOF predictions",
+    "No hyperparameter search or probability calibration",
+    "The holdout is evaluated once only for the CV-selected model"
+  ],
+  "library_versions": {
+    "python": "3.10.9",
+    "sklearn": "1.7.2",
+    "numpy": "2.2.6",
+    "pandas": "2.3.3",
+    "xgboost": "3.2.0",
+    "imblearn": "0.14.2"
+  }
+}

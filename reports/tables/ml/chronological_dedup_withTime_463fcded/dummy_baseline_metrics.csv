@@ -1,0 +1,2 @@
+tn,fp,fn,tp,precision,recall,f1,pr_auc,roc_auc,alerts,alerts_per_1000,flagged_fraud_amount,missed_fraud_amount,fraud_value_recall,scenario_review_and_friction_cost,scenario_net_value,threshold,brier_score
+85011,0,107,0,0.0,0.0,0.0,0.0012570784087971992,0.5,0,0.0,0.0,14564.99,0.0,0.0,0.0,0.5,0.0012558412738633946

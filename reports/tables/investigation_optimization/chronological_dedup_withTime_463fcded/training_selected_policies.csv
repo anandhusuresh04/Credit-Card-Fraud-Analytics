@@ -1,0 +1,5 @@
+capacity_per_10000,selected_policy,training_objective,training_objective_value,training_alerts
+5.0,score_times_amount,value_recall,50.44885233932648,74
+10.0,score_times_amount,value_recall,62.10596572599564,148
+20.0,score_times_amount,value_recall,67.76934051204852,297
+50.0,score_times_amount,value_recall,70.30403607530391,744

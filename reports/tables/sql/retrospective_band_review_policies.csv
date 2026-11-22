@@ -1,0 +1,6 @@
+policy_name,reviews,fraud_cases_reviewed,legitimate_reviews,observed_review_yield_pct,case_coverage_pct,value_coverage_pct,legitimate_value_reviewed
+all,284807,492,284315,0.1727,100.0,100.0,25102462.04
+highest_amount_band,28458,85,28373,0.2987,17.2764,78.1099,15600103.11
+lowest_amount_band,30492,181,30311,0.5936,36.7886,0.2321,25146.26
+lowest_or_highest_band,58950,266,58684,0.4512,54.065,78.342,15625249.37
+zero_amount,1825,27,1798,1.4795,5.4878,0.0,0.0

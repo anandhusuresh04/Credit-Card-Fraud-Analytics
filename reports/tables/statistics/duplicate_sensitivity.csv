@@ -1,0 +1,3 @@
+dataset,transactions,fraud_cases,fraud_rate_pct,duplicate_rows,total_transaction_amount,recorded_fraud_amount,highest_amount_decile_fraud_value_share_pct,zero_amount_fraud_rate_pct
+original_keep_duplicates,284807,492,0.172748563062,1081,25162590.01,60127.97,78.1098879606,1.47945205479
+exact_duplicates_removed,283726,473,0.166710135835,0,25102001.68,58591.39,78.3129739711,1.38274336283

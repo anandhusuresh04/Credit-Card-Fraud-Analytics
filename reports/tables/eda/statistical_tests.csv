@@ -1,0 +1,4 @@
+test,statistic,p_value,effect_size_name,effect_size,notes
+Mann-Whitney U: Amount by Class,61833399.0,8.57847231084022e-06,rank_biserial,-0.1159267696470293,"Two-sided; ties present. Difference in distributions, not means."
+Two-sample KS: Amount by Class,0.27119151307757383,2.1703053464297746e-32,KS_D,0.27119151307757383,Two-sided; ties make classical continuous-null p-value approximate.
+Chi-square: Class vs Amount quantiles,436.76949869683096,1.928973887833846e-88,Cramers_V,0.039160733841228236,df=9; minimum expected count=45.73. Observational association.

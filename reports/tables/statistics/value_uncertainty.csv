@@ -1,0 +1,2 @@
+metric,estimate_pct,ci_low_pct,ci_high_pct,bootstrap_resamples,seed,method,note
+highest_amount_decile_share_of_fraud_value,78.1098879606,72.2459414874,82.9022340692,2000,42,Fraud-row iid percentile bootstrap; full-data decile boundaries fixed,Conditional case-mix uncertainty only; ignores dependencies and drift

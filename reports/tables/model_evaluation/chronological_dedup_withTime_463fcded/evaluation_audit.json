@@ -1,0 +1,42 @@
+{
+  "audit_passed": true,
+  "run_id": "463fcded",
+  "selected_by": "training-only pooled OOF AP",
+  "metrics_recomputed_from_holdout": {
+    "tn": 84995,
+    "fp": 16,
+    "fn": 29,
+    "tp": 78,
+    "precision": 0.8297872340425532,
+    "recall": 0.7289719626168224,
+    "f1": 0.7761194029850746,
+    "pr_auc": 0.7831366870679481,
+    "roc_auc": 0.9829644915660722,
+    "brier_score": 0.000626624832111442,
+    "alerts": 94,
+    "alerts_per_1000": 1.1043492563265114,
+    "flagged_fraud_amount": 10372.83,
+    "missed_fraud_amount": 4192.16,
+    "fraud_value_recall": 0.7121755662036157,
+    "selected_model": "XGBoost__SMOTE",
+    "threshold": 0.7154984474182129,
+    "test_rows": 85118,
+    "test_frauds": 107,
+    "fraud_total_amount": 14564.99,
+    "false_positive_legitimate_value": 29406.78,
+    "holdout_prevalence": 0.0012570784087971992,
+    "run_id": "463fcded",
+    "split": "chronological",
+    "cv_oof_ap": 0.7641209046120983
+  },
+  "holdout_not_used_for_threshold_or_model_selection": true,
+  "bootstrap_ci_source": "existing holdout_metrics.csv; not recomputed",
+  "limitations": [
+    "Observations may be dependent and are anonymized",
+    "No real intervention outcomes or bank loss figures",
+    "Bootstrap excludes retraining variation and temporal drift",
+    "Chronological CV uses expanding windows; earlier data have no OOF predictions",
+    "No hyperparameter search or probability calibration",
+    "The holdout is evaluated once only for the CV-selected model"
+  ]
+}

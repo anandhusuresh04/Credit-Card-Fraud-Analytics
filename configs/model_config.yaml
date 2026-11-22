@@ -1,0 +1,58 @@
+# Credit Card Fraud Analytics & Investigation Optimization
+# MODEL CONFIGURATION REFERENCE (not automatically consumed by src.ml_models)
+#
+# src/ml_models.py currently uses argparse, NOT a YAML loader.
+# This file documents its exact default/CLI-compatible experiment settings.
+# To apply them, run the commands below or explicitly implement YAML loading.
+# Do not describe this file as active training configuration without doing so.
+
+project:
+  title: "Credit Card Fraud Analytics & Investigation Optimization"
+  dataset: "ULB / Kaggle Credit Card Fraud Detection"
+  task: "binary_fraud_classification"
+  target_column: "Class"
+  positive_class: 1
+  amount_units: "unverified dataset units (not verified bank losses)"
+
+paths:
+  input: "data/raw/creditcard.csv"
+  output: "reports/tables/ml"
+  model_dir: "models"
+
+# Flags match parse_args() in src/ml_models.py.
+# The CLI names use hyphens; YAML keys use underscores for readability.
+experiment:
+  split: "both"                  # random | chronological | both
+  test_size: 0.30
+  cv_folds: 3
+  models:
+    - "LogisticRegression"
+    - "RandomForest"
+    - "XGBoost"
+  strategies:
+    - "baseline"
+    - "SMOTE"
+    - "class_weight"
+  keep_duplicates: false          # default: deduplicate before split
+  drop_time: false                # default: retain Time as a model feature
+  threshold_objective: "f1"      # f1 | scenario_net_value
+  max_alerts_per_1000: null       # null means unconstrained F1 threshold search
+  n_boot: 200
+
+# Used only for the scenario_net_value threshold objective; NOT verified savings.
+scenario_assumptions:
+  review_cost: 5.0
+  effectiveness: 0.5
+  friction_cost: 0.0
+
+# The module's source defines SEED=42 and has no --seed CLI argument.
+reproducibility:
+  fixed_seed_in_source: 42
+  model_selection: "maximize pooled training out-of-fold average precision"
+  threshold_selection: "maximize training out-of-fold F1 (unless CLI objective is changed)"
+  holdout_use: "final evaluation only; never tune from holdout outcomes"
+
+# Run at the repository root with the project .venv:
+# .\.venv\Scripts\python.exe -m src.ml_models --split both --test-size 0.30 --cv-folds 3 --models LogisticRegression RandomForest XGBoost --strategies baseline SMOTE class_weight --threshold-objective f1 --n-boot 200
+#
+# In PowerShell, place the command on one line or use backticks for continuation.

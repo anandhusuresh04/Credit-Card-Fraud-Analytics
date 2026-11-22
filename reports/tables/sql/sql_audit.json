@@ -1,0 +1,21 @@
+{
+  "queries": [
+    "executive_kpis",
+    "zero_amount_segment",
+    "duplicate_audit",
+    "amount_band_exposure",
+    "amount_band_cumulative_exposure",
+    "elapsed_time_exposure",
+    "feature_class_profile",
+    "amount_segment_ranking",
+    "retrospective_band_review_policies",
+    "high_value_fraud_concentration"
+  ],
+  "source_rows": 284807,
+  "fraud_cases": 492,
+  "duplicate_rows": 1081,
+  "zero_amount_rows": 1825,
+  "fraud_amount_source_units": 60127.97,
+  "currency_assumed": false,
+  "interpretation": "Retrospective original raw population. This SQL analysis does not include ML holdout predictions."
+}

@@ -1,0 +1,2 @@
+key,model,strategy,cv_oof_ap,cv_folds_mean_ap,cv_folds_std_ap,oof_rows,threshold,cv_selected_f1,cv_selected_alerts_per_1000,cv_selected_scenario_net_value,cv_seconds
+LogisticRegression__baseline,LogisticRegression,baseline,0.7358323354529536,0.7423332552661337,0.011899195562473406,198608,0.14184714869480974,0.764525993883792,1.6263191815032627,11319.580000000002,1.75
