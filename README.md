@@ -1,143 +1,138 @@
 <div align="center">
 
-#  Credit Card Fraud Analytics & Investigation Optimization
+# Credit Card Fraud Analytics & Investigation Optimization
 
-### From rare-event fraud detection to smarter, capacity-constrained review decisions
+### Beyond predicting fraud: deciding what to investigate when review capacity is limited
 
 **Python · SQL · Statistical Analysis · Machine Learning · XGBoost · Streamlit · Jupyter**
 
-[![Python](https://img.shields.io/badge/Python-3.10-3776AB?style=flat-square&logo=python&logoColor=white)](https://www.python.org/)
-[![pandas](https://img.shields.io/badge/pandas-Data_Analytics-150458?style=flat-square&logo=pandas&logoColor=white)](https://pandas.pydata.org/)
+[![Python](https://img.shields.io/badge/Python-3.10%20%7C%203.11-3776AB?style=flat-square&logo=python&logoColor=white)](https://www.python.org/)
+[![pandas](https://img.shields.io/badge/pandas-Analytics-150458?style=flat-square&logo=pandas&logoColor=white)](https://pandas.pydata.org/)
 [![scikit-learn](https://img.shields.io/badge/scikit--learn-ML-F7931E?style=flat-square&logo=scikitlearn&logoColor=white)](https://scikit-learn.org/)
-[![XGBoost](https://img.shields.io/badge/XGBoost-Fraud_Detection-EC6B23?style=flat-square)](https://xgboost.readthedocs.io/)
-[![Streamlit](https://img.shields.io/badge/Streamlit-Interactive_Dashboard-FF4B4B?style=flat-square&logo=streamlit&logoColor=white)](https://streamlit.io/)
-[![SQLite](https://img.shields.io/badge/SQLite-Analytical_SQL-003B57?style=flat-square&logo=sqlite&logoColor=white)](https://www.sqlite.org/)
+[![XGBoost](https://img.shields.io/badge/XGBoost-Fraud%20Detection-EC6B23?style=flat-square)](https://xgboost.readthedocs.io/)
+[![Streamlit](https://img.shields.io/badge/Streamlit-Live%20Dashboard-FF4B4B?style=flat-square&logo=streamlit&logoColor=white)](https://fraud-investigation-analytics.streamlit.app/)
+[![SQLite](https://img.shields.io/badge/SQLite-Analytical%20SQL-003B57?style=flat-square&logo=sqlite&logoColor=white)](https://www.sqlite.org/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green?style=flat-square)](LICENSE)
 
-**Portfolio case study · Historical, offline evaluation · Reproducible research workflow**
+**Historical fraud analytics · Auditable model evaluation · Capacity-constrained investigation decisions**
 
-[Key Findings](#-key-findings) · [Live-Style Dashboard (Local)](#-interactive-streamlit-dashboard) · [Research Notebooks](#-four-research-notebooks) · [Getting Started](#-getting-started) · [Methodology](#-machine-learning-and-validation-methodology)
+### [Explore the Live Dashboard](https://fraud-investigation-analytics.streamlit.app/) · [View Source Code](https://github.com/anandhusuresh04/Credit-Card-Fraud-Analytics)
+
+[Key Findings](#key-findings) · [Investigation Results](#investigation-optimization-from-scores-to-decisions) · [Research Notebooks](#research-notebooks) · [Methodology](#machine-learning-and-validation-methodology) · [Run Locally](#getting-started)
 
 </div>
 
 ---
 
-##  Project overview
+## Project overview
 
-Credit card fraud creates two related but different analytical challenges: **identifying fraudulent transactions** and **deciding which transactions deserve investigation when analyst capacity is limited**.
+A fraud model can rank suspicious transactions, but an investigation team still faces a practical constraint: **it cannot review every transaction**. This project studies both the predictive problem and the downstream decision problem—**which transactions should be reviewed first when capacity is fixed?**
 
-This end-to-end project moves from data-quality checks and SQL analysis through statistical evidence, supervised fraud modeling, **real saved holdout predictions**, and a fixed-budget comparison of two investigation-queue strategies:
+Using the public ULB/Kaggle credit card dataset, the workflow combines data-quality auditing, SQLite reconciliation, exploratory and statistical analysis, business exposure segmentation, supervised model selection, locked-holdout evaluation, and retrospective investigation-queue simulation.
 
-- **Fraud-score ranking** — prioritize transactions with the highest model scores.
-- **Value-aware ranking** — prioritize by `fraud_score × transaction_amount`.
+Two simple queue policies are compared on the **same saved model scores**:
 
-The goal is not to declare one strategy universally superior. It is to reveal **how fraud-case recall, recorded fraudulent-value recall, legitimate-alert burden, and hypothetical economics change with review capacity**.
+- **Fraud-score ranking:** review the highest-scored transactions first.
+- **Value-aware ranking:** review transactions ranked by `fraud_score × Amount`.
+
+The objective is not to proclaim a universal winner. It is to understand how **fraud cases detected, recorded fraudulent-value coverage, false alerts, and hypothetical review economics** change with investigation capacity.
 
 > [!IMPORTANT]
-> This project evaluates an anonymized, historical public dataset. It is **not** a live banking platform, an automated card-blocking service, a validated fraud-loss forecast, or evidence of actual financial savings.
+> This is an **offline research and portfolio application**, not a live banking system. Its dashboard displays historical analytical artifacts; it does not score live payments, block transactions, or establish actual fraud losses or savings.
 
-### Questions this project answers
+## Key findings
 
-1. What does fraud look like in a highly imbalanced transaction dataset?
-2. Which apparent risk patterns have statistical support—and are they operationally meaningful?
-3. Can models detect fraud in a **locked chronological holdout** without holdout-based model or threshold selection?
-4. Do high case recall and high recorded-value recall imply the same outcome?
-5. Which investigation ranking works better at **5, 10, 20, or 50 reviews per 10,000 transactions**?
-
----
-
-##  Key findings
-
-| Finding | Verified observation | Why it matters |
+| Finding | Verified result | Interpretation |
 |:--|--:|:--|
-| Original transactions | **284,807** | Primary descriptive/statistical population |
+| Original transactions | **284,807** | Population for descriptive analysis and SQL reconciliation |
 | Fraud records | **492 (0.1727%)** | Extreme class imbalance |
-| Exact duplicate rows | **1,081** | Deduplicated before model splitting |
-| Recorded fraudulent amount | **60,127.97** | Dataset amount units, **not confirmed bank loss** |
-| Lowest amount decile | **36.79% of fraud cases / 0.23% of fraudulent value** | Case count alone can misrepresent value exposure |
-| Highest amount decile | **17.28% of fraud cases / 78.11% of fraudulent value** | Recorded value concentrates in different segments |
-| Zero-amount versus positive-amount relative risk | **~9.00×** | Observed association, not a causal or automatic-blocking rule |
-| Chronological model average precision | **0.7831** | Evaluated on unseen, time-ordered historical transactions |
-| Chronological fraud-case recall | **72.90% (78 of 107)** | Evaluated at the **training-selected** score threshold |
-| Chronological fraud-value recall | **71.22%** | Recorded fraud amount flagged by classifier |
+| Exact duplicate rows | **1,081** | Removed before model splitting |
+| Recorded fraudulent transaction amount | **60,127.97** | Dataset amount units; **not confirmed financial loss** |
+| Lowest transaction-amount decile | **36.79% of fraud cases; 0.23% of fraudulent value** | Case frequency and recorded value diverge |
+| Highest transaction-amount decile | **17.28% of fraud cases; 78.11% of fraudulent value** | High-value exposure is concentrated |
+| Zero-amount vs. nonzero-amount fraud relative risk | **~9.0×** | Exploratory association, not a causal rule |
+| Chronological holdout average precision | **0.7831** | Model discrimination on the primary locked holdout |
+| Chronological holdout precision / recall | **82.98% / 72.90%** | At the training-selected classification threshold |
+| Chronological classifier fraudulent-value recall | **71.22%** | Recorded fraud amount flagged at that threshold |
 
-###  Flagship insight — investigation capacity changes the winner
+### Flagship finding: the preferred queue changes with capacity
 
-The same chronological holdout contains **85,118 transactions**. Compare predefined queues using equal review capacity:
+The primary chronological holdout contains **85,118 transactions**, including **107 fraud cases**. Both ranking rules were applied at identical, predefined review budgets.
 
-| Reviews / 10k | Review slots | Fraud-score value recall | Score × amount value recall | Value-aware minus score-only |
+| Reviews per 10,000 transactions | Review slots | Fraud-score ranking: value coverage | Score × amount ranking: value coverage | Value-aware difference |
 |---:|---:|---:|---:|---:|
-| 5 | 42 | 19.28% | **62.98%** | **+43.70 pp** |
-| 10 | 85 | 70.94% | **71.43%** | +0.49 pp |
-| 20 | 170 | **87.75%** | 83.84% | −3.91 pp |
-| 50 | 425 | **87.96%** | 87.13% | −0.83 pp |
+| **5** | **42** | 19.28% | **62.98%** | **+43.70 percentage points** |
+| 10 | 85 | 70.94% | **71.43%** | +0.49 percentage points |
+| **20** | **170** | **87.75%** | 83.84% | −3.91 percentage points |
+| 50 | 425 | **87.96%** | 87.13% | −0.83 percentage points |
 
-At **5 reviews/10k**, the value-aware heuristic covers far more recorded fraudulent value. At **20 reviews/10k**, fraud-score ranking also catches many more fraud cases (**84 versus 28**) and produces fewer legitimate alerts (**86 versus 142**).
+At **5 reviews per 10,000 transactions**, the value-aware ranking covered substantially more of the **historically recorded fraudulent transaction value**. At **20 reviews per 10,000**, score-only ranking detected **84 fraud cases versus 28** and raised **86 legitimate alerts versus 142** for value-aware ranking.
 
-**Interpretation:** There is no universally best ranking across budgets. Both policies are reported on the holdout for transparency; the policy used as the *training-selected strategy* is chosen using **training out-of-fold (OOF) evidence**, not by picking the holdout winner.
+**Takeaway:** A ranking policy that looks attractive at one capacity can be inferior at another. These are retrospective **holdout comparisons**, not evidence of recovered money. The training-selected operational policy is chosen separately using **training out-of-fold (OOF) evidence**, never by selecting whichever policy looks best on the holdout.
+
+**[Explore the investigation results in the live dashboard](https://fraud-investigation-analytics.streamlit.app/)**
 
 ---
 
-##  Explore the project
+## Explore the project
 
-| Start here | What you will find |
+| Component | What it demonstrates |
 |:--|:--|
-| **[Notebook 01 — Data Understanding & EDA](notebooks/01_data_understanding_eda.ipynb)** | Source data, quality, prevalence, amounts, elapsed time and PCA patterns |
-| **[Notebook 02 — Statistical & Business Insights](notebooks/02_statistical_business_insights.ipynb)** | Nine exploratory tests, effect sizes, uncertainty, segment exposure, review rules and illustrative economics |
-| **[Notebook 03 — ML Experiments & Evaluation](notebooks/03_ml_experiments_evaluation.ipynb)** | Nine candidates per full run, leakage prevention, training-only selection, **real predictions**, diagnostics and error analysis |
-| **[Notebook 04 — Investigation Optimization](notebooks/04_investigation_optimization.ipynb)** | **Eight reconstructed chronological queues**, capacity frontiers, policy selection, operational trade-offs and sensitivity |
-| **[Streamlit Dashboard](dashboard/app.py)** | Five interactive, read-only analytical workspaces |
-| **[SQL Queries](sql/)** | SQLite-based independent reconciliations and analytical queries |
-| **[Automated Tests](tests/)** | Unit and consistency checks for analytical modules |
+| **[Live Streamlit dashboard](https://fraud-investigation-analytics.streamlit.app/)** | Five interactive workspaces for patterns, statistics, model evidence, and investigation decisions |
+| [Notebook 01 — Data Understanding & EDA](notebooks/01_data_understanding_eda.ipynb) | Dataset structure, quality, prevalence, transaction amounts, elapsed time, and anonymized feature patterns |
+| [Notebook 02 — Statistical & Business Insights](notebooks/02_statistical_business_insights.ipynb) | Exploratory tests, effect sizes, uncertainty, segment exposure, and illustrative business scenarios |
+| [Notebook 03 — ML Experiments & Evaluation](notebooks/03_ml_experiments_evaluation.ipynb) | Nine model configurations per full run, training-only selection, saved holdout predictions, and error analysis |
+| [Notebook 04 — Investigation Optimization](notebooks/04_investigation_optimization.ipynb) | Eight reconstructed chronological queues, capacity trade-offs, policy provenance, and sensitivity analysis |
+| [SQL analysis](sql/) | Independent SQLite reconciliations and analytical queries |
+| [Automated tests](tests/) | Unit and consistency checks |
 
-**Suggested reading order:** notebooks **01 → 02 → 03 → 04**. Start with Notebook 04 if your main interest is business decision-making; read Notebook 03 for model-validation details.
+**Suggested order:** Notebooks **01 → 02 → 03 → 04**. For the central decision-making insight, begin with Notebook 04; for validation design, see Notebook 03.
 
----
-
-##  End-to-end architecture
+## End-to-end architecture
 
 ```mermaid
 flowchart TD
     A[ULB creditcard.csv] --> B[Data quality and validation]
-    B --> C[EDA, statistical evidence and business exposure]
-    B --> D[SQLite SQL reconciliation]
+    B --> C[EDA, statistics and value exposure]
+    B --> D[SQLite reconciliation]
     B --> E[Exact deduplication for ML]
-    E --> F{Holdout design}
-    F --> G[Chronological split — primary]
-    F --> H[Stratified random split — secondary]
-    G --> I[Train-fold preprocessing and imbalance handling]
+    E --> F{Evaluation design}
+    F --> G[Chronological split: primary]
+    F --> H[Stratified random split: secondary]
+    G --> I[Fold-contained preprocessing and imbalance handling]
     H --> I
-    I --> J[9 candidate configurations and training OOF scores]
+    I --> J[Nine candidates and training OOF scores]
     J --> K[Training-only model and threshold selection]
     K --> L[Locked-holdout predictions and error analysis]
-    L --> M[Fraud-score and score × amount queues]
-    J --> N[Training-OOF policy selection per capacity]
+    J --> N[Training-OOF investigation policy selection]
+    L --> M[Fixed-budget ranking queues]
     N --> M
-    M --> O[Capacity, case/value and cost trade-offs]
-    C --> P[Research notebooks + Streamlit dashboard]
+    M --> O[Cases, value, alerts and cost trade-offs]
+    C --> P[Research notebooks and Streamlit dashboard]
     D --> P
     L --> P
     O --> P
 ```
 
-### Analysis populations — don't mix the denominators
+### Analysis populations: keep the denominators separate
 
-| Population | Rows | Fraud labels | Used for |
+| Population | Transactions | Fraud labels | Purpose |
 |:--|--:|--:|:--|
-| Original dataset | 284,807 | 492 | EDA, statistics, business analysis, independent SQL reconciliation |
-| Exact-deduplicated dataset | 283,726 | 473 | Model development and evaluation |
-| Chronological training partition | 198,607 | — | Candidate CV, training OOF selection and model fitting |
-| Chronological locked holdout | 85,118 | 107 | Primary model and investigation evaluation |
-| Stratified random locked holdout | 85,118 | 142 | Secondary evaluation sensitivity |
+| Original dataset | 284,807 | 492 | EDA, statistical/business analysis, SQL reconciliation |
+| Exact-deduplicated dataset | 283,726 | 473 | ML development and evaluation |
+| Chronological training partition | 198,607 | — | Cross-validation, OOF selection, fitting |
+| Chronological locked holdout | 85,118 | 107 | Primary model and queue evaluation |
+| Stratified random locked holdout | 85,118 | 142 | Secondary sensitivity evaluation |
 
-One chronological boundary row is excluded from the split to preserve strict timestamp separation. The two holdouts are **different populations**, so performance differences do **not** isolate the effect of time or model choice causally.
+One boundary row was excluded from the chronological split to maintain strict timestamp separation. The random and chronological holdouts have **different composition**, and their selected models also differ; comparing their scores does not isolate a causal effect of the split strategy.
 
 ---
 
-##  Machine learning and validation methodology
+## Machine learning and validation methodology
 
-### Model candidates
+### Candidate search
 
-Each full experiment evaluates **nine configurations**: three model families × three imbalance strategies.
+Each full experiment compares **nine configurations** across three model families and three imbalance-handling strategies.
 
 | Model family | Baseline | SMOTE | Class weighting |
 |:--|:---:|:---:|:---:|
@@ -145,131 +140,112 @@ Each full experiment evaluates **nine configurations**: three model families × 
 | Random Forest | ✓ | ✓ | ✓ |
 | XGBoost | ✓ | ✓ | ✓ |
 
-The primary validation uses **three-fold, expanding-window `TimeSeriesSplit`**. Preprocessing and sampling are fitted **inside the relevant training folds**; the locked holdout is not used to select the winning model or decision threshold.
+The primary chronological experiment uses **three-fold expanding-window `TimeSeriesSplit`**. Preprocessing and any resampling are fitted within the relevant training folds to limit leakage.
 
-**Two distinct training-only selection stages:**
+Model and threshold selection occur **before** evaluation on the locked holdout:
 
-1. **Model choice:** highest pooled training-OOF **average precision (AP)**.
-2. **Classification threshold:** maximize training-OOF **F1** for the chosen model.
+1. **Model selection:** highest pooled training-OOF **average precision (AP)**.
+2. **Classification threshold:** training-OOF **F1** maximization for the selected model.
+3. **Holdout evaluation:** apply the selected model and threshold once to the reserved test data.
 
-The threshold-based classifier in Notebook 03 is not equivalent to the fixed-capacity review queues in Notebook 04.
+A classification threshold is **not** the same thing as a fixed-capacity investigation queue: the former produces binary predictions, while the latter orders transactions and selects a specified number for review.
 
-### Chronological holdout — primary model
+### Primary chronological holdout
 
-| Measure | Result |
+| Metric | Result |
 |:--|--:|
 | Selected model | **XGBoost + SMOTE** |
 | Training-selected threshold | **0.715498** |
-| Holdout observations | **85,118** |
-| Fraud labels | **107** |
+| Holdout transactions / fraud cases | **85,118 / 107** |
 | Average precision (AP; reported as PR-AUC) | **0.7831** |
 | Precision | **82.98%** |
-| Fraud-case recall | **72.90%** |
-| F1 score | **0.7761** |
-| Recorded fraudulent-value recall | **71.22%** |
+| Recall | **72.90%** |
+| F1 | **0.7761** |
+| Fraudulent-value recall | **71.22%** |
 | True positives / false positives | **78 / 16** |
 | False negatives / true negatives | **29 / 84,995** |
-| Recorded fraud amount flagged / missed | **10,372.83 / 4,192.16** |
+| Recorded fraudulent amount flagged / missed | **10,372.83 / 4,192.16** |
 
-**Random holdout — secondary context:** XGBoost + class weighting; AP **0.8112**, precision **93.86%**, case recall **75.35%**, F1 **0.8359**. The comparison is descriptive because both the selected model and holdout composition differ.
+**Secondary random holdout:** XGBoost + class weighting; **AP 0.8112**, **precision 93.86%**, **recall 75.35%**, **F1 0.8359**. This is supporting context, not a controlled claim that random splitting or one imbalance strategy is inherently superior.
 
-**Prediction audit:** Notebook 03 loads the actual `holdout_predictions.csv` rows, applies the saved training-selected threshold, reproduces the confusion matrix and metrics, and inspects false positives and false negatives. It does **not** silently retrain the model or claim that saved scores constitute a live prediction API.
+Notebook 03 audits the **saved transaction-level holdout predictions** against the stored training-selected threshold and reproduces confusion-matrix metrics. It does not claim to perform fresh inference or retrain the model when opened.
 
----
+## Investigation optimization: from scores to decisions
 
-##  Investigation optimization — from scores to decisions
-
-The investigation analysis is a **fixed-budget, retrospective batch ranking study**, not a real-time blocking system.
-
-**Predefined ranking functions**
+The investigation study simulates **fixed-size retrospective review batches**, rather than real-time payment blocking.
 
 ```text
-Fraud-score policy:  rank_i = fraud_score_i
-Value-aware policy:  rank_i = fraud_score_i × Amount_i
+Fraud-score policy: rank_i = fraud_score_i
+Value-aware policy: rank_i = fraud_score_i × Amount_i
 
-Allowed review slots = floor(N_holdout × reviews_per_10,000 / 10,000)
+Review slots = floor(N_holdout × reviews_per_10,000 / 10,000)
 ```
 
-Ties are resolved deterministically using the original row identifier. Queues are built at **5, 10, 20 and 50 reviews/10k**.
+The four review budgets are **5, 10, 20, and 50 reviews per 10,000 transactions**. Ties are broken deterministically using the original row identifier.
 
-What is independently checked:
-
-- **All eight chronological queues:** two policies × four budgets, reconstructed from real saved transaction-level scores.
-- **Both objectives:** detected-fraud cases and recorded fraudulent transaction-value coverage.
-- **Legitimate burden:** false alerts and recorded legitimate transaction value flagged.
-- **Training-only policy choices:** preserved and reported separately from retrospective holdout comparisons.
-- **Marginal capacity:** additional cases and value captured for extra review slots.
-- **Economics:** clearly labeled assumptions for analyst review cost, intervention effectiveness and potential legitimate-alert friction.
+The independent checks cover all **eight primary chronological queues** (two ranking policies × four budgets), fraud cases captured, recorded fraudulent-value coverage, legitimate alerts, legitimate transaction amount flagged, and marginal returns from additional review slots. Investigation-policy selection is checked against **training OOF evidence**, separately from holdout comparisons. Additional financial scenarios vary assumed review costs, intervention effectiveness, and legitimate-alert friction.
 
 > [!CAUTION]
-> `fraud_score × Amount` is an **uncalibrated ranking heuristic**, not estimated expected financial loss. Even if a transaction was flagged retrospectively, that does **not** prove that an intervention would prevent a loss. All economic net values are **hypothetical**.
+> `fraud_score × Amount` is a **ranking heuristic**, not a calibrated estimate of expected financial loss. A flagged historical fraud transaction is not proof that an intervention would have prevented a loss. All financial scenario outputs are **hypothetical**, not realized savings.
 
 ---
 
-##  Interactive Streamlit dashboard
+## Live interactive Streamlit dashboard
 
-The [Streamlit app](dashboard/app.py) reads the saved analytical artifacts and does **not** retrain models. It provides five workspaces:
+### **[Launch Fraud Risk Lab](https://fraud-investigation-analytics.streamlit.app/)**
 
-| Workspace | Main questions |
+The dashboard is deployed publicly on **Streamlit Community Cloud** and reads saved analytical outputs. **No raw transaction upload, live transaction scoring, or model retraining is required to explore the deployed app.**
+
+| Workspace | Explore |
 |:--|:--|
-| **Overview** | How rare is fraud? Where are cases and recorded value concentrated? |
-| **Risk & Statistics** | Which segment differences are associated with fraud, and how large are the effects? |
-| **Model Lab** | What did training choose? How well did the locked holdout perform? |
-| **Investigation Studio** | Which policy covers cases/value at a particular review budget? What are the false-alert and what-if economics trade-offs? |
-| **Data & Methodology** | Which population and artifact produced each result? What are the boundaries? |
+| **Overview** | Fraud prevalence, transaction-value concentration, and elapsed-time patterns |
+| **Risk & Statistics** | Segment associations, statistical evidence, effect sizes, and uncertainty |
+| **Model Lab** | Training selection, holdout performance, and model errors |
+| **Investigation Studio** | Review-budget frontiers, case/value trade-offs, false alerts, and scenario assumptions |
+| **Data & Methodology** | Dataset populations, experiment provenance, and analytical limitations |
 
-**Launch from the repository root:**
+The **Overview page and live deployment have been visually confirmed**. Other pages and interactive controls should be checked separately after each substantive dashboard update; a successful deployment alone does not verify every interaction.
+
+**Run locally** from the repository root:
 
 ```powershell
 .\.venv\Scripts\python.exe -m streamlit run dashboard/app.py
 ```
 
-Open **http://localhost:8501** after the server starts. The app requires the matching saved `reports/` outputs to be present locally.
-
-**Dashboard screenshots:** Once you have finalized and committed screenshots, add a gallery here using relative links such as `docs/screenshots/overview.png`, `docs/screenshots/model_lab.png`, and `docs/screenshots/investigation_studio.png`. No screenshots are linked until those repository files actually exist.
+Then open `http://localhost:8501`. Local use depends on the matching saved artifacts in `reports/`.
 
 ---
 
-##  Tech stack
+## Tech stack
 
-| Layer | Technologies |
+| Layer | Tools |
 |:--|:--|
-| Data engineering | Python, pandas, NumPy, CSV validation |
-| Statistics | SciPy, effect sizes, Holm correction, Wilson intervals, bootstrap uncertainty |
+| Data processing | Python, pandas, NumPy |
+| Statistical analysis | SciPy, effect sizes, Holm correction, Wilson intervals, bootstrap uncertainty |
 | Visualization | Matplotlib, Plotly |
-| Machine learning | scikit-learn, imbalanced-learn / SMOTE, XGBoost, joblib |
+| Machine learning | scikit-learn, imbalanced-learn (SMOTE), XGBoost, joblib |
 | SQL | SQLite, analytical SQL and reconciliation checks |
-| Application | Streamlit |
-| Research and testing | Jupyter, VS Code, `unittest` |
+| Interactive application | Streamlit Community Cloud |
+| Research and quality assurance | Jupyter, VS Code, `unittest`, Git/GitHub |
 
----
-
-##  Repository structure
+## Repository structure
 
 ```text
-Credit_Card_Fraud_Analytics/
+Credit-Card-Fraud-Analytics/
 ├── README.md
-├── requirements.txt                 # verify/provide before publishing
-├── requirements_dashboard.txt       # optional dashboard-specific dependencies
+├── LICENSE
+├── .gitignore
+├── pyproject.toml
+├── requirements.txt
+├── requirements_dashboard.txt
+├── configs/
+│   └── model_config.yaml
 ├── .streamlit/
-│   └── config.toml                  # if used by your selected dashboard version
+│   └── config.toml
 ├── data/
-│   ├── raw/creditcard.csv            # download separately; do not commit
-│   └── processed/                    # generated data / SQLite
-├── src/
-│   ├── data_cleaner.py
-│   ├── analysis.py
-│   ├── visualization.py
-│   ├── statistical_analysis.py
-│   ├── business_analysis.py
-│   ├── ml_models.py
-│   ├── model_evaluation.py
-│   ├── investigation_optimization.py
-│   └── sql_pipeline.py
-├── sql/
-│   ├── schema.sql
-│   ├── fraud_analysis.sql
-│   └── business_queries.sql
+│   └── raw/                    # creditcard.csv downloaded separately; not committed
+├── src/                        # data, statistics, ML, evaluation, optimization, SQL
+├── sql/                        # schema and analytical queries
 ├── dashboard/
 │   ├── app.py
 │   └── data_access.py
@@ -278,53 +254,48 @@ Credit_Card_Fraud_Analytics/
 │   ├── 02_statistical_business_insights.ipynb
 │   ├── 03_ml_experiments_evaluation.ipynb
 │   └── 04_investigation_optimization.ipynb
-├── tests/
 ├── reports/
-│   ├── tables/                       # generated CSV / JSON evidence
-│   └── figures/                      # generated diagnostic charts
-├── models/                            # generated fitted artifacts; typically exclude
-└── docs/screenshots/                  # optional, approved dashboard screenshots
+│   ├── tables/                 # selected published analytical outputs
+│   └── figures/                # saved plots and diagnostics
+└── tests/
 ```
 
-Some generated folders and auxiliary configuration files may differ from this illustrative tree. **Do not publish a requirements or screenshot link until the target file exists.**
+The tree summarizes the main tracked components, not every generated local directory. Raw data, model binaries, and large training-only artifacts are intentionally excluded from Git. Some notebooks or regeneration commands may require artifacts that are not part of the published snapshot.
 
 ---
 
-##  Getting started
+## Getting started
 
-### Prerequisites
+### Option A: Explore without installing anything
 
-- **Windows + PowerShell** for the commands below (equivalent commands can be adapted for Linux/macOS).
-- **Python 3.10**, an isolated virtual environment, and Git for repository cloning.
-- A local copy of the **ULB / Kaggle Credit Card Fraud Detection** CSV.
-- Enough time and compute for a nine-candidate CV run if regenerating all ML artifacts. **Notebooks and dashboard do not retrain.**
+Open the **[live Streamlit dashboard](https://fraud-investigation-analytics.streamlit.app/)** or read the four notebooks on GitHub. This is the fastest path for reviewers and recruiters.
 
-### Step 1 — Clone, create the environment, install requirements
+### Option B: Run locally (Windows / PowerShell)
+
+**Prerequisites:** Git, Python **3.10** (the development environment), and the public ULB/Kaggle dataset. The deployed cloud app was configured with Python **3.11**. A fresh-clone, end-to-end regeneration on a separate machine has not been fully verified.
+
+**1. Clone and install**
 
 ```powershell
-git clone https://github.com/anandhusuresh04/REPLACE_WITH_REPO_NAME.git
-cd REPLACE_WITH_REPO_NAME
+git clone https://github.com/anandhusuresh04/Credit-Card-Fraud-Analytics.git
+cd Credit-Card-Fraud-Analytics
 
 py -3.10 -m venv .venv
 .\.venv\Scripts\python.exe -m pip install --upgrade pip
 .\.venv\Scripts\python.exe -m pip install -r requirements.txt
 ```
 
-Replace `REPLACE_WITH_REPO_NAME` with the actual repository name when you create it on GitHub. The `requirements.txt` install command assumes a verified, complete dependency file has been added to the repository.
+**2. Obtain the source dataset**
 
-### Step 2 — Download the source data
-
-Get the dataset from **[Kaggle — Credit Card Fraud Detection](https://www.kaggle.com/datasets/mlg-ulb/creditcardfraud)** and place:
+Download [Credit Card Fraud Detection (ULB/Kaggle)](https://www.kaggle.com/datasets/mlg-ulb/creditcardfraud) and place the CSV at:
 
 ```text
 data/raw/creditcard.csv
 ```
 
-There is **no real customer data or credential required**. `Time` is elapsed time; `Amount` has no verified currency.
+The dataset's `Time` field represents elapsed seconds, and `Amount` does **not** provide a verified currency or confirmed loss figure.
 
-### Step 3 — Generate descriptive, statistical, business, and SQL evidence
-
-Run from the **repository root**, in order:
+**3. Regenerate descriptive, statistical, business, and SQL artifacts**
 
 ```powershell
 .\.venv\Scripts\python.exe -m src.data_cleaner
@@ -336,124 +307,95 @@ Run from the **repository root**, in order:
 .\.venv\Scripts\python.exe -m src.sql_pipeline
 ```
 
-These reports use the **original transaction population** unless a report explicitly describes a deduplication sensitivity check.
-
-### Step 4 — Generate complete ML experiments (compute-intensive)
+**4. Optional: regenerate full ML experiments (compute-intensive)**
 
 ```powershell
-# Chronological experiment — primary evaluation
 .\.venv\Scripts\python.exe -m src.ml_models --split chronological
-
-# Random experiment — secondary evaluation
 .\.venv\Scripts\python.exe -m src.ml_models --split random
 ```
 
-Find the generated directories under `reports/tables/ml/` and use **each run's actual directory name** when producing associated plots and investigation outputs:
+Use the **actual newly generated run directory** for downstream evaluation and optimization:
 
 ```powershell
-# Example of a previously verified run ID; replace after regenerating
+# Example from the documented chronological experiment.
+# Replace this path with your newly generated run folder if it differs.
 $run = "reports/tables/ml/chronological_dedup_withTime_463fcded"
+
 .\.venv\Scripts\python.exe -m src.model_evaluation --run-dir $run --format png svg
 .\.venv\Scripts\python.exe -m src.investigation_optimization --run-dir $run
 ```
 
-Repeat the last two commands for the random run if you need full secondary dashboard/notebook coverage. **Never mix prediction files, metrics, and investigation results from different run IDs.**
+Repeat downstream commands for the random run if desired. **Never mix prediction files, metrics, and investigation outputs across run IDs.** Large training OOF and threshold-curve files are excluded from Git and must be regenerated for workflows that require them.
 
-### Step 5 — Explore the notebooks and dashboard
-
-To work in Jupyter/VS Code:
+**5. Open the notebooks or dashboard**
 
 ```powershell
 .\.venv\Scripts\python.exe -m pip install ipykernel
 .\.venv\Scripts\python.exe -m ipykernel install --user --name fraud-analytics --display-name "Python (Fraud Analytics)"
-```
-
-Open the notebooks in order and use **Restart Kernel and Run All**, selecting `.venv` rather than Anaconda `base`.
-
-```powershell
-# Launch the analytical dashboard
 .\.venv\Scripts\python.exe -m streamlit run dashboard/app.py
 ```
 
-### Step 6 — Run automated tests
+Use the project's `.venv` kernel when running notebooks in VS Code/Jupyter. The four final notebooks were executed locally during development.
+
+**6. Run automated tests**
 
 ```powershell
 .\.venv\Scripts\python.exe -m unittest discover -s tests -v
 ```
 
-**Reproducibility status:** Analytical tests and notebooks passed during development, but a clean machine/clean clone installation and full regeneration check has **not yet been verified**. Do not interpret the documentation as a claim that a one-command production deployment is available.
+**Reproducibility scope:** Saved reports, tests, and the notebooks were checked during development; the public dashboard is deployed. A completely fresh installation and full regeneration on an independent machine remains **unverified**. Published outputs are not a substitute for retraining artifacts excluded from version control.
 
 ---
 
-##  What was validated?
+## Validation record
 
-| Component | Development evidence |
+| Component | Verified development evidence |
 |:--|:--|
-| Data quality | 284,807 original records; 1,081 exact duplicates; missing-value and schema checks |
-| Business and statistics | Fraud counts and recorded amount reconciled across saved reports |
-| ML | Nine candidate configurations per full experiment; training-only selection; saved holdout predictions independently audited |
-| Chronological prediction audit | 85,118 rows; **TP 78 / FP 16 / FN 29 / TN 84,995** |
-| Investigation | **8/8** chronological queues reconstructed from real predictions and reconciled |
-| SQL | Independent SQLite reconciliation with Python source totals |
-| Notebooks | All four final research notebooks executed locally with project `.venv` |
-| Dashboard | Five workspaces validated during development; final screenshots/theme require local review |
+| Data quality | 284,807 original records; 1,081 exact duplicates; schema and missing-value checks |
+| Business/statistical analysis | Counts and recorded transaction amounts reconciled across reports |
+| ML selection and evaluation | Nine candidate configurations per full run; training-only selection; saved predictions audited |
+| Chronological confusion matrix | **TP 78 / FP 16 / FN 29 / TN 84,995** |
+| Investigation | **8/8** primary queues reconstructed and reconciled |
+| SQL | Independent SQLite totals reconciled with source data |
+| Research notebooks | All four final notebooks executed in the project environment |
+| Cloud dashboard | Successful public deployment; Overview page visually confirmed |
 
-The notebook tests check the specific invariants they implement; they are **not** evidence of production safety or future predictive performance.
+These checks establish consistency of the documented historical experiments—not production readiness or future model performance.
 
----
+## Limitations and responsible interpretation
 
-##  Limitations and responsible interpretation
-
-- **Short observation period:** Roughly two days of historical transactions; no support for claims about long-run drift or recurring local-time seasonality.
-- **Anonymized variables:** `V1`–`V28` have no verified business semantics; the project does not infer customer identities or transaction purposes.
-- **Different denominators:** Descriptive analyses retain original duplicates; ML uses an exact-deduplicated population.
-- **Exploratory significance:** Multiple-testing correction reduces false discovery risk but does not make associations causal or operationally actionable.
-- **Model scores:** Discrimination and ranking performance do **not** establish calibrated probabilities or production-ready thresholds.
-- **Historical value ≠ loss:** `Amount` is not a verified chargeback, recovered amount, or bank loss.
-- **Financial what-if ≠ realized saving:** Cost, prevention effectiveness, and legitimate-transaction friction are assumed inputs.
-- **Retrospective evaluation ≠ deployment:** No live fraud decisions, automatic holds, intervention validation or future-distribution guarantees.
-- **Selection integrity:** Model, classification threshold and investigation policy are chosen from training evidence, **not from hindsight on the locked holdout**.
+- **Limited observation period:** Approximately two days of historical transactions; no evidence of long-run drift or seasonality.
+- **Anonymized features:** `V1`–`V28` have no verified business interpretation; no customer identities are inferred.
+- **Different analysis populations:** Descriptive statistics use original records, while ML uses exact-deduplicated data.
+- **Associations are not causation:** Exploratory significance and multiple-testing correction do not justify automated interventions.
+- **Model scores are not proven calibrated probabilities:** Ranking quality alone does not establish valid expected-loss estimates.
+- **Recorded value is not verified loss:** `Amount` is not confirmed chargeback, prevented loss, or recovered funds.
+- **Financial scenarios are assumptions:** Review costs, prevention effectiveness, and false-alert friction are illustrative.
+- **Retrospective is not real time:** No live fraud decisions, payment holds, intervention experiments, or future-distribution guarantees.
+- **Selection integrity:** Model, threshold, and investigation policy are chosen from training evidence rather than holdout hindsight.
 
 ### Dataset provenance
 
-**ULB Machine Learning Group / Worldline credit card transactions**, distributed as **[Credit Card Fraud Detection on Kaggle](https://www.kaggle.com/datasets/mlg-ulb/creditcardfraud)**. Check the source's license and access terms before redistribution. Keep the raw 150 MB `creditcard.csv` out of Git history unless redistribution is explicitly permitted and intentional.
+The source is the **ULB Machine Learning Group / Worldline credit card transactions** dataset, distributed via [Kaggle — Credit Card Fraud Detection](https://www.kaggle.com/datasets/mlg-ulb/creditcardfraud). Consult its access and licensing terms before redistribution. The raw `creditcard.csv` is intentionally not included in this repository.
 
----
+### License
 
-##  GitHub publication checklist
-
-- [ ] Verify `requirements.txt` exists, installs cleanly and matches the final `src/` and notebook imports.
-- [ ] Add `.gitignore` exclusions for `.venv/`, raw data, generated SQLite, model binaries, caches, secrets and temporary reports not intended for Git.
-- [ ] Decide which **small, reproducible report artifacts** will be included so notebooks and dashboard have a clear first-run path.
-- [ ] Confirm the `.streamlit/config.toml` theme file if the chosen app version requires it.
-- [ ] Save the four executed notebooks and remove obsolete notebook versions and bulky unnecessary outputs.
-- [ ] Add and verify local dashboard screenshots before linking them in this README.
-- [ ] Run the tests and perform a clean-clone reproducibility check when practical.
-- [ ] Check model experiment identifiers and metrics before final publication.
+The project's original source code and documentation are provided under the [MIT License](LICENSE). This does **not** change the separate terms governing the source dataset or third-party dependencies.
 
 ---
 
 <div align="center">
 
-###  Connect with Me
+### Connect with Me
 
-Let's connect! Feel free to reach out for collaborations, data discussions, or opportunities.
+Open to data analytics discussions, project feedback, and professional opportunities.
 
-<a href="https://www.linkedin.com/in/anandhu-suresh-in/" target="_blank" rel="noopener noreferrer">
-  <img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn" />
-</a>
+<a href="https://www.linkedin.com/in/anandhu-suresh-in/" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn"></a>
 &nbsp;
-<a href="mailto:anandhu.suresh.dev@gmail.com">
-  <img src="https://img.shields.io/badge/Gmail-EA4335?style=for-the-badge&logo=gmail&logoColor=white" alt="Gmail" />
-</a>
+<a href="mailto:anandhu.suresh.dev@gmail.com"><img src="https://img.shields.io/badge/Gmail-EA4335?style=for-the-badge&logo=gmail&logoColor=white" alt="Email"></a>
 &nbsp;
-<a href="https://github.com/anandhusuresh04" target="_blank" rel="noopener noreferrer">
-  <img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white" alt="GitHub" />
-</a>
+<a href="https://github.com/anandhusuresh04" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white" alt="GitHub"></a>
 
-<br />
-<br />
-
-**Built with Python, SQL, statistical reasoning and an emphasis on auditable decision-making.**
+**Built around auditable analysis, honest validation, and better investigation decisions.**
 
 </div>
